@@ -1,6 +1,6 @@
 const localPgConnection = {
   host: "localhost",
-  database: "instagram",
+  database: "hobbits",
   user: "victor",
   password: "pass"
 };
