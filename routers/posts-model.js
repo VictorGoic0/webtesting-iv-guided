@@ -51,6 +51,7 @@ async function create(item) {
       "profiles.thumbnailUrl",
       "posts.description"
     ])
+    .from("profiles")
     .innerJoin("profiles", "posts.user_id", "profiles.id");
   return post;
 }
@@ -69,7 +70,7 @@ async function remove(id) {
 
 async function update(item, id) {
   const editedPost = await db("posts")
-    .where({ id })
+    .where({ "posts.id": id })
     .update(item)
     .returning([
       "posts.id",
@@ -80,6 +81,7 @@ async function update(item, id) {
       "profiles.thumbnailUrl",
       "posts.description"
     ])
+    .from("profiles")
     .innerJoin("profiles", "posts.user_id", "profiles.id");
   return editedPost;
 }
