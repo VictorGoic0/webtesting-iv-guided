@@ -42,15 +42,15 @@ async function findById(id) {
 async function create(item) {
   const [post] = await db("posts")
     .insert(item)
-    .returning({
-      id: "posts.id",
-      user_id: "posts.user_id",
-      imageUrl: "posts.imageUrl",
-      likes: "posts.likes",
-      username: "profiles.username",
-      thumbnailUrl: "profiles.thumbnailUrl",
-      description: "posts.description"
-    })
+    .returning([
+      "posts.id",
+      "posts.user_id",
+      "posts.imageUrl",
+      "posts.likes",
+      "profiles.username",
+      "profiles.thumbnailUrl",
+      "posts.description"
+    ])
     .innerJoin("profiles", "posts.user_id", "profiles.id");
   return post;
 }
@@ -71,15 +71,15 @@ async function update(item, id) {
   const editedPost = await db("posts")
     .where({ id })
     .update(item)
-    .returning({
-      id: "posts.id",
-      user_id: "posts.user_id",
-      imageUrl: "posts.imageUrl",
-      likes: "posts.likes",
-      username: "profiles.username",
-      thumbnailUrl: "profiles.thumbnailUrl",
-      description: "posts.description"
-    })
+    .returning([
+      "posts.id",
+      "posts.user_id",
+      "posts.imageUrl",
+      "posts.likes",
+      "profiles.username",
+      "profiles.thumbnailUrl",
+      "posts.description"
+    ])
     .innerJoin("profiles", "posts.user_id", "profiles.id");
   return editedPost;
 }
