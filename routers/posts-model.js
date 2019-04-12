@@ -23,7 +23,7 @@ async function findById(id) {
 async function create(item) {
   const [post] = await db("posts")
     .insert(item)
-    .returning();
+    .returning("*");
   return post;
 }
 
@@ -43,6 +43,6 @@ async function update(item, id) {
   const editedPost = await db("posts")
     .where({ id })
     .update(item)
-    .returning();
+    .returning("*");
   return editedPost;
 }
